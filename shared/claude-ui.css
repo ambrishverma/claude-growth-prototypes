@@ -343,15 +343,36 @@
 .proto-mobile-status-icons svg { width: 16px; height: 11px; flex-shrink: 0; }
 .proto-mobile-status-icons svg:nth-child(3) { width: 24px; }
 
+/* Inner scroll wrapper — sits between the frame chrome (notch, status
+   bar, home pill — all position:absolute) and the content. Scrolls
+   when content exceeds the frame's content height. */
+.proto-mobile-frame-content {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
 .proto-mobile-frame .cl-app {
-  height: 100%;
+  height: auto;
+  min-height: 100%;
+  overflow: visible;
   flex-direction: column;
 }
 .proto-mobile-frame .cl-sidebar { display: none; }
-.proto-mobile-frame .cl-main { width: 100%; }
+.proto-mobile-frame .cl-main { width: 100%; min-height: 100%; min-width: 0; }
+.proto-mobile-frame .cl-chat { flex: 1 0 auto; overflow: visible; }
 .proto-mobile-frame .cl-topbar {
   padding: 50px 16px 8px;
   min-height: 80px;
+  position: sticky; top: 0; z-index: 5;
+  background: var(--bg-app);
+}
+/* Email screen has its own min-height: 100vh — constrain to frame */
+.proto-mobile-frame .email-app {
+  min-height: 100%;
+  height: auto;
+  padding: 50px 16px 28px;
+  overflow: visible;
 }
 .proto-mobile-frame .cl-tb-left { flex: 0; }
 .proto-mobile-frame .cl-tb-title { font-size: 12px; max-width: 50%; }

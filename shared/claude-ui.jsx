@@ -289,7 +289,7 @@ function MobileFrame({ children, time = "9:41" }) {
           </svg>
         </div>
       </div>
-      {children}
+      <div className="proto-mobile-frame-content">{children}</div>
       <div className="proto-mobile-home"/>
     </div>
   );
