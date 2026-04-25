@@ -1,0 +1,209 @@
+/* Claude Design tokens — grounded in claude.ai's actual visual language */
+:root {
+  /* Brand */
+  --claude-coral: #C96442;        /* primary action */
+  --claude-coral-hover: #B8543A;
+  --claude-coral-soft: #F4E5DD;   /* peachy backgrounds */
+  --claude-coral-tint: #FBF0EA;
+  --claude-coral-deep: #8C3F26;
+
+  /* Surfaces (warm neutrals) */
+  --bg-app: #F5F4EE;              /* claude.ai cream/parchment */
+  --bg-canvas: #FAF9F5;
+  --bg-card: #FFFFFF;
+  --bg-sidebar: #F0EEE6;
+  --bg-chat-user: #F0EEE6;
+  --bg-elevated: #FFFFFF;
+
+  /* Borders */
+  --border-soft: #E8E6DC;
+  --border-medium: #D9D7CC;
+  --border-strong: #B8B5A8;
+
+  /* Text */
+  --text-primary: #1F1E1B;
+  --text-secondary: #5A584F;
+  --text-tertiary: #8B8779;
+  --text-muted: #A8A496;
+  --text-inverse: #FAF9F5;
+
+  /* Semantic */
+  --success: #2D7A4E;
+  --success-soft: #E3F0E6;
+  --warning: #B8721C;
+  --warning-soft: #FAEEDB;
+  --info: #2C5C8A;
+  --info-soft: #E2EAF2;
+  --danger: #B0392E;
+
+  /* Typography — system stack tuned to feel like Claude */
+  --font-sans: "Söhne", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Tiempos Text", "Source Serif Pro", "Iowan Old Style", "Apple Garamond", Georgia, serif;
+  --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  /* Radii — Claude uses generously rounded corners */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-2xl: 28px;
+  --r-pill: 999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(31, 30, 27, 0.04);
+  --shadow-md: 0 2px 8px rgba(31, 30, 27, 0.06), 0 1px 2px rgba(31, 30, 27, 0.04);
+  --shadow-lg: 0 8px 24px rgba(31, 30, 27, 0.08), 0 2px 6px rgba(31, 30, 27, 0.04);
+  --shadow-coral: 0 4px 14px rgba(201, 100, 66, 0.18), 0 1px 3px rgba(201, 100, 66, 0.12);
+
+  /* Motion */
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 140ms;
+  --dur: 220ms;
+  --dur-slow: 380ms;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  color: var(--text-primary);
+  background: var(--bg-app);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01", "cv11";
+}
+
+/* Common utility primitives */
+.mono { font-family: var(--font-mono); font-feature-settings: normal; }
+.serif { font-family: var(--font-serif); }
+
+button { font-family: inherit; }
+
+/* Claude C logo treatment */
+.claude-c {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px; height: 22px;
+  border-radius: 5px;
+  background: var(--claude-coral);
+  color: white;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+.claude-c.lg { width: 28px; height: 28px; font-size: 17px; border-radius: 6px; }
+.claude-c.xl { width: 36px; height: 36px; font-size: 22px; border-radius: 8px; }
+
+/* Pill badges */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: var(--r-pill);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid transparent;
+}
+.pill.coral { background: var(--claude-coral-soft); color: var(--claude-coral-deep); }
+.pill.pro   { background: #1F1E1B; color: #FAF9F5; }
+.pill.free  { background: var(--border-soft); color: var(--text-secondary); }
+.pill.success { background: var(--success-soft); color: var(--success); }
+.pill.warning { background: var(--warning-soft); color: var(--warning); }
+.pill.info  { background: var(--info-soft); color: var(--info); }
+.pill.dark  { background: #1F1E1B; color: #FAF9F5; }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--dur) var(--ease), transform var(--dur-fast) var(--ease), box-shadow var(--dur) var(--ease);
+  font-family: inherit;
+  color: inherit;
+  background: transparent;
+}
+.btn:active { transform: translateY(1px); }
+.btn-primary {
+  background: var(--claude-coral);
+  color: white;
+  box-shadow: var(--shadow-coral);
+  position: relative;
+  overflow: hidden;
+}
+.btn-primary::after {
+  content: "";
+  position: absolute;
+  top: 0; left: -120%;
+  width: 60%; height: 100%;
+  background: linear-gradient(105deg, transparent 0%, rgba(255,255,255,0) 30%, rgba(255,255,255,0.28) 50%, rgba(255,255,255,0) 70%, transparent 100%);
+  pointer-events: none;
+  animation: btn-shimmer 4.5s ease-in-out infinite;
+}
+@keyframes btn-shimmer {
+  0%, 60% { left: -120%; }
+  85%, 100% { left: 220%; }
+}
+.btn-primary:hover {
+  background: var(--claude-coral-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(201, 100, 66, 0.28), 0 2px 4px rgba(201, 100, 66, 0.16);
+}
+.btn-primary:hover::after { animation-duration: 1.6s; }
+.btn-secondary {
+  background: var(--bg-card);
+  border-color: var(--border-medium);
+  color: var(--text-primary);
+}
+.btn-secondary:hover { border-color: var(--border-strong); background: #FFFFFF; }
+.btn-ghost { color: var(--text-secondary); }
+.btn-ghost:hover { background: var(--bg-sidebar); }
+.btn-lg { padding: 14px 22px; font-size: 15px; border-radius: var(--r-lg); }
+.btn-block { width: 100%; }
+
+/* Focus rings */
+button:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 2px solid var(--claude-coral);
+  outline-offset: 2px;
+}
+
+/* Subtle scroll containers */
+.scroll-y { overflow-y: auto; scrollbar-width: thin; scrollbar-color: var(--border-medium) transparent; }
+.scroll-y::-webkit-scrollbar { width: 8px; }
+.scroll-y::-webkit-scrollbar-thumb { background: var(--border-medium); border-radius: 8px; }
+
+/* Fade-in helper */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+.fade-up { animation: fadeUp 320ms var(--ease-out) both; }
+
+/* Subtle ticking pulse */
+@keyframes pulseDot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.pulse-dot { animation: pulseDot 1.6s ease-in-out infinite; }
+
+/* Live counter highlight */
+@keyframes flashGreen {
+  0% { background: transparent; }
+  20% { background: rgba(45, 122, 78, 0.12); }
+  100% { background: transparent; }
+}
+.flash { animation: flashGreen 1.2s ease-out; }

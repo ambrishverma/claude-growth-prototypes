@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Monetization Prototypes — Index</title>
+<link rel="stylesheet" href="shared/tokens.css">
+<style>
+  body { background: var(--bg-canvas); }
+  .page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 48px 120px;
+  }
+  .hero {
+    margin-bottom: 64px;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--claude-coral);
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 56px;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 0 0 20px;
+    text-wrap: balance;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--claude-coral);
+  }
+  .lede {
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--text-secondary);
+    max-width: 640px;
+  }
+  .meta {
+    display: flex;
+    gap: 24px;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-soft);
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .meta b { color: var(--text-primary); font-weight: 500; }
+
+  .protos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 980px) { .protos { grid-template-columns: 1fr; } }
+
+  .proto-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--r-xl);
+    padding: 0;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex; flex-direction: column;
+    transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur);
+  }
+  .proto-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--border-medium);
+  }
+  .proto-thumb {
+    aspect-ratio: 16/10;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .proto-thumb svg { width: 100%; height: 100%; display: block; }
+
+  .proto-body { padding: 22px 24px 26px; flex: 1; display: flex; flex-direction: column; }
+  .proto-num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--text-tertiary);
+    margin-bottom: 8px;
+  }
+  .proto-title {
+    font-family: var(--font-serif);
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+  }
+  .proto-tag {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin: 0 0 18px;
+    line-height: 1.5;
+    flex: 1;
+  }
+  .proto-flow {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 18px;
+    font-size: 11px;
+    color: var(--text-tertiary);
+  }
+  .proto-flow span {
+    padding: 4px 10px;
+    background: var(--bg-app);
+    border-radius: var(--r-pill);
+    border: 1px solid var(--border-soft);
+  }
+  .proto-cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--claude-coral);
+    font-size: 14px; font-weight: 500;
+  }
+  .proto-card:hover .proto-cta { gap: 10px; }
+
+  .footer {
+    margin-top: 96px;
+    padding-top: 32px;
+    border-top: 1px solid var(--border-soft);
+    font-size: 13px;
+    color: var(--text-tertiary);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-c { display: flex; align-items: center; gap: 8px; }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="hero">
+      <div class="eyebrow">Monetization growth · Interactive prototypes</div>
+      <h1>Three ways to grow <em>Claude</em> revenue without breaking the product.</h1>
+      <p class="lede">
+        Hi-fi clickable prototypes for Dynamic Offers, Power Weeks, and Sprint Packs — each one
+        embedded in a faithful Claude UI shell so you can feel how the moment lands in context.
+      </p>
+      <div class="meta">
+        <div><b>9 screens</b> across 3 flows</div>
+        <div><b>Desktop & mobile</b> via tweaks</div>
+        <div><b>Live data</b> &amp; click-through navigation</div>
+      </div>
+    </div>
+
+    <div class="protos">
+      <a class="proto-card" href="dynamic-offers/index.html">
+        <div class="proto-thumb">
+          <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="200" fill="#FBF0EA"/>
+            <rect x="20" y="20" width="280" height="36" rx="8" fill="#fff" stroke="#E8E6DC"/>
+            <rect x="32" y="32" width="80" height="12" rx="3" fill="#E8E6DC"/>
+            <rect x="20" y="68" width="280" height="44" rx="8" fill="#fff" stroke="#E8E6DC"/>
+            <circle cx="38" cy="90" r="9" fill="#C96442"/>
+            <rect x="56" y="84" width="160" height="6" rx="2" fill="#1F1E1B"/>
+            <rect x="56" y="96" width="120" height="5" rx="2" fill="#8B8779"/>
+            <rect x="20" y="124" width="280" height="56" rx="10" fill="#C96442"/>
+            <rect x="32" y="138" width="100" height="9" rx="2" fill="#fff" opacity="0.95"/>
+            <rect x="32" y="155" width="60" height="6" rx="2" fill="#fff" opacity="0.7"/>
+            <rect x="220" y="146" width="60" height="14" rx="4" fill="#fff" opacity="0.9"/>
+          </svg>
+        </div>
+        <div class="proto-body">
+          <div class="proto-num">01 / Dynamic Offers</div>
+          <div class="proto-title">Personalized offers that meet you where you are.</div>
+          <div class="proto-tag">A cohort engine surfaces the right offer at the right moment — in-product, in admin, and over email.</div>
+          <div class="proto-flow">
+            <span>In-product</span>
+            <span>Admin</span>
+            <span>Email</span>
+          </div>
+          <div class="proto-cta">Open prototype →</div>
+        </div>
+      </a>
+
+      <a class="proto-card" href="power-weeks/index.html">
+        <div class="proto-thumb">
+          <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="200" fill="#FBF0EA"/>
+            <rect x="20" y="20" width="280" height="160" rx="10" fill="#fff" stroke="#E8E6DC"/>
+            <rect x="36" y="36" width="120" height="11" rx="3" fill="#C96442"/>
+            <rect x="36" y="56" width="200" height="14" rx="3" fill="#1F1E1B"/>
+            <rect x="36" y="76" width="160" height="14" rx="3" fill="#1F1E1B"/>
+            <rect x="36" y="106" width="248" height="6" rx="3" fill="#F0EEE6"/>
+            <rect x="36" y="106" width="142" height="6" rx="3" fill="#C96442"/>
+            <rect x="36" y="124" width="60" height="8" rx="2" fill="#8B8779"/>
+            <rect x="36" y="148" width="248" height="22" rx="6" fill="#C96442"/>
+          </svg>
+        </div>
+        <div class="proto-body">
+          <div class="proto-num">02 / Power Weeks</div>
+          <div class="proto-title">A 7-day Pro trial that earns its conversion.</div>
+          <div class="proto-tag">Hand-picked, high-intent free users get a week of full Claude — with structured nudges, then a paywall they're ready for.</div>
+          <div class="proto-flow">
+            <span>Invitation</span>
+            <span>Day 4 nudge</span>
+            <span>End-of-trial</span>
+          </div>
+          <div class="proto-cta">Open prototype →</div>
+        </div>
+      </a>
+
+      <a class="proto-card" href="sprint-packs/index.html">
+        <div class="proto-thumb">
+          <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="200" fill="#FBF0EA"/>
+            <rect x="20" y="20" width="280" height="48" rx="8" fill="#2D5F3E"/>
+            <rect x="34" y="36" width="140" height="10" rx="3" fill="#fff" opacity="0.95"/>
+            <rect x="34" y="52" width="80" height="6" rx="2" fill="#fff" opacity="0.6"/>
+            <text x="260" y="48" font-family="monospace" font-size="14" fill="#fff" font-weight="700">18:42</text>
+            <rect x="20" y="80" width="280" height="44" rx="10" fill="#fff" stroke="#E8E6DC"/>
+            <rect x="34" y="94" width="80" height="9" rx="2" fill="#1F1E1B"/>
+            <rect x="34" y="108" width="140" height="6" rx="2" fill="#8B8779"/>
+            <text x="276" y="106" font-family="sans-serif" font-size="14" fill="#1F1E1B" font-weight="600" text-anchor="end">$40</text>
+            <rect x="20" y="136" width="280" height="44" rx="10" fill="#fff" stroke="#E8E6DC"/>
+            <rect x="34" y="150" width="80" height="9" rx="2" fill="#1F1E1B"/>
+            <rect x="34" y="164" width="120" height="6" rx="2" fill="#8B8779"/>
+            <text x="276" y="162" font-family="sans-serif" font-size="14" fill="#1F1E1B" font-weight="600" text-anchor="end">$25</text>
+          </svg>
+        </div>
+        <div class="proto-body">
+          <div class="proto-num">03 / Sprint Packs</div>
+          <div class="proto-title">Buy a window of unlimited Claude when you need it.</div>
+          <div class="proto-tag">Limit-hit moments become opt-in sprints — discoverable, time-boxed, and bundled into Max tiers.</div>
+          <div class="proto-flow">
+            <span>Discovery</span>
+            <span>Active sprint</span>
+            <span>Max bundling</span>
+          </div>
+          <div class="proto-cta">Open prototype →</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="footer">
+      <div class="footer-c">
+        <span class="claude-c">C</span>
+        <span>Claude · Monetization growth prototypes</span>
+      </div>
+      <div>v1 · April 2026</div>
+    </div>
+  </div>
+</body>
+</html>
