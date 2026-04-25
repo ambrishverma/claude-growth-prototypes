@@ -338,3 +338,31 @@
   color: var(--text-tertiary);
   margin: 12px 0 0;
 }
+
+/* ─────────────────────────────────────────────────────────────────────
+   Mobile overrides — apply when actually on a small viewport, OR when
+   the prototype is being previewed inside the desktop phone frame /
+   native mobile shell. Sprint-packs has wider grids than the others, so
+   needs explicit reflows.
+   ───────────────────────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .sp-active-stats { grid-template-columns: repeat(2, 1fr); }
+  .sp-bundle-wrap { padding: 16px; }
+  .sp-bundle-title { font-size: 26px; }
+  .sp-option-head { gap: 12px; }
+  .sp-tier { padding: 16px; }
+}
+.proto-mobile-frame .sp-active-stats,
+.proto-mobile-native .sp-active-stats { grid-template-columns: repeat(2, 1fr); }
+.proto-mobile-frame .sp-bundle-wrap,
+.proto-mobile-native .sp-bundle-wrap { padding: 16px; max-width: 100%; }
+.proto-mobile-frame .sp-bundle-title,
+.proto-mobile-native .sp-bundle-title { font-size: 24px; }
+.proto-mobile-frame .sp-bundle-app,
+.proto-mobile-native .sp-bundle-app { padding: 16px 0; overflow-y: auto; height: 100%; }
+.proto-mobile-frame .sp-tier,
+.proto-mobile-native .sp-tier { padding: 16px; }
+.proto-mobile-frame .sp-active-wrap,
+.proto-mobile-native .sp-active-wrap { padding: 12px; }
+.proto-mobile-frame .sp-option-head,
+.proto-mobile-native .sp-option-head { gap: 12px; }

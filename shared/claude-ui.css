@@ -419,3 +419,113 @@
   pointer-events: none;
   opacity: 0.85;
 }
+
+/* ─────────────────────────────────────────────────────────────────────
+   Visible Desktop / Mobile preview pill — sits in the top-right of the
+   stage on desktop. Hides itself on real phone viewports.
+   ───────────────────────────────────────────────────────────────────── */
+.proto-device-toggle {
+  position: fixed;
+  top: 12px; right: 16px;
+  display: inline-flex;
+  background: rgba(31,30,27,0.85);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--r-pill);
+  padding: 3px;
+  z-index: 99;
+  gap: 0;
+}
+.proto-device-toggle-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: rgba(255,255,255,0.6);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.proto-device-toggle-btn:hover { color: rgba(255,255,255,0.9); }
+.proto-device-toggle-btn.is-active {
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+/* ─────────────────────────────────────────────────────────────────────
+   Native mobile mode — used when the prototype is being viewed on an
+   actual phone. MobileFrame strips its chrome and renders the children
+   inside .proto-mobile-native, which inherits all the .proto-mobile-frame
+   layout overrides for cl-app etc.
+   ───────────────────────────────────────────────────────────────────── */
+.proto-mobile-native {
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--bg-app);
+  overflow: hidden;
+  position: relative;
+}
+.proto-mobile-native .cl-app { height: 100%; flex-direction: column; }
+.proto-mobile-native .cl-sidebar { display: none; }
+.proto-mobile-native .cl-main { width: 100%; }
+.proto-mobile-native .cl-topbar {
+  padding: max(env(safe-area-inset-top, 12px), 12px) 16px 8px;
+  min-height: 56px;
+}
+.proto-mobile-native .cl-tb-left { flex: 0; }
+.proto-mobile-native .cl-tb-title { font-size: 12px; max-width: 50%; }
+.proto-mobile-native .cl-tb-model { font-size: 12px; padding: 5px 8px; }
+.proto-mobile-native .cl-chat { padding: 16px 12px 8px; }
+.proto-mobile-native .cl-chat-inner { gap: 16px; }
+.proto-mobile-native .cl-msg-user .cl-msg-bubble,
+.proto-mobile-native .cl-msg-body { font-size: 13.5px; }
+.proto-mobile-native .cl-composer-wrap {
+  padding: 6px 12px max(env(safe-area-inset-bottom, 16px), 16px);
+}
+.proto-mobile-native .cl-composer { padding: 4px 4px 4px 8px; }
+.proto-mobile-native .cl-comp-input { font-size: 13px; }
+.proto-mobile-native .cl-comp-model { display: none; }
+.proto-mobile-native .cl-comp-foot { display: none; }
+.proto-mobile-native .dyn-offer { padding: 16px; gap: 10px; }
+.proto-mobile-native .dyn-offer-title { font-size: 21px; }
+.proto-mobile-native .dyn-offer-price-new { font-size: 30px; }
+.proto-mobile-native .pw-invite { padding: 18px; gap: 14px; }
+.proto-mobile-native .pw-invite-title { font-size: 22px; }
+.proto-mobile-native .pw-paywall-title { font-size: 26px; }
+.proto-mobile-native .pw-paywall { padding-top: 0; }
+.proto-mobile-native .pw-stat { padding: 14px 16px; }
+.proto-mobile-native .pw-stat.highlight { padding: 22px 16px; }
+.proto-mobile-native .pw-stat-value { font-size: 26px; }
+.proto-mobile-native .pw-stat.highlight .pw-stat-value { font-size: 38px; }
+
+/* ─────────────────────────────────────────────────────────────────────
+   Phone viewport — collapses prototype shell controls so screens get
+   the full screen. Floating tweaks panel hides too — the visible
+   DeviceToggle already self-hides on phones.
+   ───────────────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .proto-screen-meta { display: none; }
+  .proto-device-toggle { display: none; }
+  .twk-panel { display: none !important; }
+  .proto-stage,
+  .proto-stage.is-mobile { background: var(--bg-app); padding: 0; }
+  .proto-stage.is-mobile {
+    align-items: stretch;
+    justify-content: stretch;
+  }
+  .proto-stepnav {
+    bottom: max(env(safe-area-inset-bottom, 12px), 12px);
+  }
+  /* When desktop layouts are forced onto mobile (admin engine, email),
+     allow horizontal scroll so the user can pan rather than reflow into
+     a broken wrap. */
+  .proto-stage:not(.is-mobile) > * {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}

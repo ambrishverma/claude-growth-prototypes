@@ -1,4 +1,4 @@
-/* global React, ReactDOM, Icon, Sidebar, Topbar, ChatMessage, Composer, StepNav, useCountUp */
+/* global React, ReactDOM, Icon, Sidebar, Topbar, ChatMessage, Composer, StepNav, useCountUp, MobileFrame, DeviceToggle, isPhoneViewport */
 const { useState, useEffect, useRef } = React;
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -316,15 +316,20 @@ function ScreenMaxBundle({ tweaks }) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────
-const { TweaksPanel, useTweaks, TweakSection } = window;
-const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{}/*EDITMODE-END*/;
+const { TweaksPanel, useTweaks, TweakSection, TweakRadio } = window;
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "device": "desktop"
+}/*EDITMODE-END*/;
 
 function App() {
   const urlParams = new URLSearchParams(window.location.search);
   const initialStep = Math.max(0, Math.min(2, parseInt(urlParams.get('step') || '0', 10)));
   const hideNav = urlParams.get('hide') === 'nav';
   const [step, setStep] = useState(initialStep);
-  const [tweaks, setTweaks] = useTweaks(TWEAK_DEFAULTS);
+  const initialDefaults = isPhoneViewport()
+    ? { ...TWEAK_DEFAULTS, device: "mobile" }
+    : TWEAK_DEFAULTS;
+  const [tweaks, setTweaks] = useTweaks(initialDefaults);
   const screens = ["Discovery", "Active sprint", "Max bundle"];
   const labels = [
     "01 Discovery at Limit-Hit Moment",
@@ -337,14 +342,33 @@ function App() {
     <ScreenMaxBundle key="2" tweaks={tweaks}/>,
   ];
 
+  const isMobile = tweaks.device === "mobile";
+  const screenContent = isMobile
+    ? <MobileFrame>{screensComp[step]}</MobileFrame>
+    : screensComp[step];
+
   return (
     <>
       {!hideNav && <div className="proto-screen-meta">{labels[step]}</div>}
-      <div className="proto-stage" data-screen-label={labels[step]} key={step}>
-        {screensComp[step]}
+      {!hideNav && (
+        <DeviceToggle value={tweaks.device} onChange={v => setTweaks({device: v})}/>
+      )}
+      <div
+        className={"proto-stage" + (isMobile ? " is-mobile" : "")}
+        data-screen-label={labels[step]}
+        key={step + "-" + tweaks.device}
+      >
+        {screenContent}
       </div>
       <StepNav steps={screens} current={step} onChange={setStep} hidden={hideNav}/>
       <TweaksPanel title="Tweaks">
+        <TweakSection label="Device">
+          <TweakRadio
+            label="View"
+            options={[{value: "desktop", label: "Desktop"}, {value: "mobile", label: "Mobile"}]}
+            value={tweaks.device} onChange={v => setTweaks({device: v})}
+          />
+        </TweakSection>
         <TweakSection label="About">
           <p style={{fontSize: 12, color: "var(--text-tertiary)", margin: 0, lineHeight: 1.5}}>
             Step through the 3 screens with the bottom nav or ← → arrows. Sprint Packs let users buy time-boxed unlimited windows when they hit limits.

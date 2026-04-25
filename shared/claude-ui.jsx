@@ -242,9 +242,26 @@ function StepNav({ steps, current, onChange, accent = "var(--claude-coral)", hid
 window.StepNav = StepNav;
 
 // ─────────────────────────────────────────────────────────────────────────
-// Mobile frame wrapper — iPhone-style chrome around any screen content
+// Phone viewport detection — true when we're on an actual phone, in which
+// case the prototype should render native (no fake notch/home pill chrome).
+// ─────────────────────────────────────────────────────────────────────────
+function isPhoneViewport() {
+  if (typeof window === "undefined") return false;
+  const narrow = window.matchMedia("(max-width: 767px)").matches;
+  const coarse = window.matchMedia("(pointer: coarse)").matches;
+  return narrow || (coarse && window.innerWidth < 900);
+}
+window.isPhoneViewport = isPhoneViewport;
+
+// ─────────────────────────────────────────────────────────────────────────
+// Mobile frame wrapper — iPhone-style chrome around screen content on
+// desktop. On a real phone, the chrome is skipped and children render
+// edge-to-edge in the actual device viewport.
 // ─────────────────────────────────────────────────────────────────────────
 function MobileFrame({ children, time = "9:41" }) {
+  if (isPhoneViewport()) {
+    return <div className="proto-mobile-native">{children}</div>;
+  }
   return (
     <div className="proto-mobile-frame">
       <div className="proto-mobile-notch"/>
@@ -278,6 +295,36 @@ function MobileFrame({ children, time = "9:41" }) {
   );
 }
 window.MobileFrame = MobileFrame;
+
+// ─────────────────────────────────────────────────────────────────────────
+// DeviceToggle — surface the desktop/mobile preview as a visible pill so
+// it doesn't live solely inside the tweaks panel. Hides itself on real
+// phone viewports (where the choice is forced).
+// ─────────────────────────────────────────────────────────────────────────
+function DeviceToggle({ value, onChange }) {
+  if (isPhoneViewport()) return null;
+  const opts = [
+    { value: "desktop", label: "Desktop" },
+    { value: "mobile", label: "Mobile" },
+  ];
+  return (
+    <div className="proto-device-toggle" role="tablist" aria-label="Preview device">
+      {opts.map((o) => (
+        <button
+          key={o.value}
+          type="button"
+          role="tab"
+          aria-selected={value === o.value}
+          className={"proto-device-toggle-btn" + (value === o.value ? " is-active" : "")}
+          onClick={() => onChange(o.value)}
+        >
+          {o.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+window.DeviceToggle = DeviceToggle;
 
 function useCountUp(target, ms = 800) {
   const [v, setV] = useState(0);

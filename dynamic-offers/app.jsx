@@ -1,4 +1,4 @@
-/* global React, ReactDOM, Icon, Sidebar, Topbar, ChatMessage, Composer, StepNav, MobileFrame */
+/* global React, ReactDOM, Icon, Sidebar, Topbar, ChatMessage, Composer, StepNav, MobileFrame, DeviceToggle, isPhoneViewport */
 const { useState, useEffect, useMemo } = React;
 
 // ─────────────────────────────────────────────────────────────────────────
@@ -302,7 +302,10 @@ function App() {
   const initialStep = Math.max(0, Math.min(2, parseInt(urlParams.get('step') || '0', 10)));
   const hideNav = urlParams.get('hide') === 'nav';
   const [step, setStep] = useState(initialStep);
-  const [tweaks, setTweaks] = useTweaks(TWEAK_DEFAULTS);
+  const initialDefaults = isPhoneViewport()
+    ? { ...TWEAK_DEFAULTS, device: "mobile" }
+    : TWEAK_DEFAULTS;
+  const [tweaks, setTweaks] = useTweaks(initialDefaults);
   const screens = ["In-product", "Admin engine", "Email"];
 
   const screenComponents = [
@@ -328,6 +331,9 @@ function App() {
   return (
     <>
       {!hideNav && <div className="proto-screen-meta">{screenLabels[step]}</div>}
+      {!hideNav && wrappable && (
+        <DeviceToggle value={tweaks.device} onChange={v => setTweaks({device: v})}/>
+      )}
       <div
         className={"proto-stage" + (isMobile && wrappable ? " is-mobile" : "")}
         data-screen-label={screenLabels[step]}
