@@ -137,9 +137,12 @@ const __TWEAKS_STYLE = `
 // (__edit_mode_set_keys → host rewrites the EDITMODE block on disk).
 function useTweaks(defaults) {
   const [values, setValues] = React.useState(defaults);
-  const setTweak = React.useCallback((key, val) => {
-    setValues((prev) => ({ ...prev, [key]: val }));
-    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { [key]: val } }, '*');
+  const setTweak = React.useCallback((keyOrEdits, val) => {
+    const edits = typeof keyOrEdits === 'string'
+      ? { [keyOrEdits]: val }
+      : keyOrEdits;
+    setValues((prev) => ({ ...prev, ...edits }));
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits }, '*');
   }, []);
   return [values, setTweak];
 }

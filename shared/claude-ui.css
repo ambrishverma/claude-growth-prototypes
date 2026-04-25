@@ -457,29 +457,38 @@
 
 /* ─────────────────────────────────────────────────────────────────────
    Native mobile mode — used when the prototype is being viewed on an
-   actual phone. MobileFrame strips its chrome and renders the children
-   inside .proto-mobile-native, which inherits all the .proto-mobile-frame
-   layout overrides for cl-app etc.
+   actual phone. MobileFrame strips its chrome and the children render
+   in normal page flow so the browser handles scroll (avoids the
+   iOS-Safari 100vh / address-bar trap that clips the bottom of the
+   page when height is fixed).
    ───────────────────────────────────────────────────────────────────── */
 .proto-mobile-native {
   width: 100%;
-  height: 100vh;
-  height: 100dvh;
+  min-height: 100dvh;
   background: var(--bg-app);
-  overflow: hidden;
   position: relative;
 }
-.proto-mobile-native .cl-app { height: 100%; flex-direction: column; }
+.proto-mobile-native .cl-app {
+  height: auto;
+  min-height: 100dvh;
+  overflow: visible;
+  flex-direction: column;
+}
+.proto-mobile-native .cl-main { width: 100%; min-height: 100dvh; }
+.proto-mobile-native .cl-chat {
+  flex: 1 0 auto;
+  overflow: visible;
+  padding: 16px 12px 96px; /* bottom padding clears floating StepNav */
+}
 .proto-mobile-native .cl-sidebar { display: none; }
-.proto-mobile-native .cl-main { width: 100%; }
 .proto-mobile-native .cl-topbar {
   padding: max(env(safe-area-inset-top, 12px), 12px) 16px 8px;
   min-height: 56px;
+  position: sticky; top: 0; z-index: 5;
 }
 .proto-mobile-native .cl-tb-left { flex: 0; }
 .proto-mobile-native .cl-tb-title { font-size: 12px; max-width: 50%; }
 .proto-mobile-native .cl-tb-model { font-size: 12px; padding: 5px 8px; }
-.proto-mobile-native .cl-chat { padding: 16px 12px 8px; }
 .proto-mobile-native .cl-chat-inner { gap: 16px; }
 .proto-mobile-native .cl-msg-user .cl-msg-bubble,
 .proto-mobile-native .cl-msg-body { font-size: 13.5px; }
@@ -503,16 +512,22 @@
 .proto-mobile-native .pw-stat.highlight .pw-stat-value { font-size: 38px; }
 
 /* ─────────────────────────────────────────────────────────────────────
-   Phone viewport — collapses prototype shell controls so screens get
-   the full screen. Floating tweaks panel hides too — the visible
-   DeviceToggle already self-hides on phones.
+   Phone viewport — collapses prototype shell controls and switches the
+   stage from a fixed 100vh container to a natural-flow container so
+   the document scrolls (avoids iOS Safari's URL-bar-clipping trap).
    ───────────────────────────────────────────────────────────────────── */
 @media (max-width: 767px) {
+  html, body { height: auto; overflow-y: auto; }
   .proto-screen-meta { display: none; }
   .proto-device-toggle { display: none; }
   .twk-panel { display: none !important; }
   .proto-stage,
-  .proto-stage.is-mobile { background: var(--bg-app); padding: 0; }
+  .proto-stage.is-mobile {
+    background: var(--bg-app);
+    padding: 0;
+    height: auto;
+    min-height: 100dvh;
+  }
   .proto-stage.is-mobile {
     align-items: stretch;
     justify-content: stretch;
@@ -520,9 +535,9 @@
   .proto-stepnav {
     bottom: max(env(safe-area-inset-bottom, 12px), 12px);
   }
-  /* When desktop layouts are forced onto mobile (admin engine, email),
-     allow horizontal scroll so the user can pan rather than reflow into
-     a broken wrap. */
+  /* When desktop-only layouts (admin engine, email) are forced onto
+     a phone, allow horizontal scroll within the screen so it can be
+     panned rather than wrapping into a broken layout. */
   .proto-stage:not(.is-mobile) > * {
     max-width: 100%;
     overflow-x: auto;
