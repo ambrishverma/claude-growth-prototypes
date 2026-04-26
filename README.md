@@ -6,7 +6,7 @@ Hi-fi clickable prototypes for three Claude monetization concepts, embedded in a
 
 ## The three prototypes
 
-1. **Dynamic Offers** — A cohort engine surfaces the right offer at the right moment, in-product, in admin, and over email.
+1. **Claude Ultra** — A high-tier plan ($1,000/mo) for solopreneurs running on Claude: persistent workspaces, specialized agents (Tax Analyst, Equity Researcher, Marketer, Scientist), and background runs. Replaces a typical $1,700/mo stack of contractors and SaaS.
 2. **Power Weeks** — A 7-day Pro trial that earns its conversion: invitation → day-4 nudge → end-of-trial paywall.
 3. **Sprint Packs** — Limit-hit moments become opt-in, time-boxed sprints of unlimited Claude, with bundling into Max tiers.
 
