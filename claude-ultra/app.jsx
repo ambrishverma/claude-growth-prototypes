@@ -222,7 +222,7 @@ function DesktopScreen3({ onUpgrade }) {
             <div className="s3-price"><span className="num">$1,000</span><span className="per">/month</span></div>
             <ul className="s3-feats">
               <li className="s3-feat"><span className="tk">✓</span>Up to <b>10 workspaces</b> with memory & faster runs</li>
-              <li className="s3-feat"><span className="tk">✓</span>Specialized agents: <b>Tax Analyst, Equity Researcher, Marketer, Scientist</b></li>
+              <li className="s3-feat"><span className="tk">✓</span>Specialized agents: <b>Designer, Marketer, Accountant, Support</b></li>
               <li className="s3-feat"><span className="tk">✓</span>Background execution via Desktop & Cowork</li>
               <li className="s3-feat"><span className="tk">✓</span>Publish agents to marketplace <em>(free Year 1)</em></li>
               <li className="s3-feat"><span className="tk">✓</span>50× Pro consumption cap (margin-safe)</li>
@@ -399,7 +399,7 @@ function MobileScreen3({ onUpgrade }) {
         <div className="s3-price"><span className="num">$1,000</span><span className="per">/month</span></div>
         <ul className="s3-feats">
           <li><span className="tk">✓</span>Up to <b>10 workspaces</b> with memory & faster runs</li>
-          <li><span className="tk">✓</span>Specialized agents: <b>Tax Analyst, Equity Researcher, Marketer, Scientist</b></li>
+          <li><span className="tk">✓</span>Specialized agents: <b>Designer, Marketer, Accountant, Support</b></li>
           <li><span className="tk">✓</span>Background execution via Desktop & Cowork</li>
           <li><span className="tk">✓</span>Publish agents to marketplace <em>(free Year 1)</em></li>
           <li><span className="tk">✓</span>50× Pro consumption cap (margin-safe)</li>
